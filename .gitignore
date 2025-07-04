@@ -6,3 +6,5 @@ idna*
 requests*
 urllib3*
 venv
+
+lambda_layer
