@@ -7,4 +7,6 @@ requests*
 urllib3*
 venv
 
+*.pem
+
 dependency_layers
