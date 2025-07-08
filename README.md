@@ -1,31 +1,35 @@
 # Event-Driven Serverless Pipeline for Real-Time News NLP and Sentiment Scoring
-
+[![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://your-streamlit-url.com)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/nakuleshj/news-nlp-pipeline)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time news data using AWS services. Designed for cost-efficient, scalable deployment using only free-tier AWS services.
 
-***Live Dashboard (Deployed on Streamlit Cloud):*** [https://your-streamlit-url.com](https://your-streamlit-url.com)
 
-***GitHub Repository:*** [https://github.com/nakuleshj/news-nlp-pipeline](https://github.com/nakuleshj/news-nlp-pipeline)
 
 ## Problem Statement
 News data is critical for monitoring sentiment shifts across industries and companies. However, traditional pipelines are batch-heavy, costly, or not scalable. This project solves that by providing a **real-time, serverless architecture** to process news with **NLP sentiment scoring** and expose it via a low-latency, self-service dashboard.
 
 ## Features
 
-- **Scheduled ingestion** at 9AM and 5PM using EventBridge
+- **Scheduled ingestion** at 9AM and 5PM each day using EventBridge
 - **NLP scoring** using VADER for sentiment scoring & classification
 - **Data quality validation** with Python & pandas library
 - **Lightweight querying** with DuckDB
 - **Interactive Streamlit dashboard** with sentiment gauge, sentiment heatmaps, source analysis, and refresh button
+- **Basic error logging via AWS CloudWatch for both Lambda functions**  
 - **Dashboard deployed on Streamlit Cloud** for easy sharing and low-latency access
-- **Fully Free-Tier Deployable**
+
+## Live Dashboard Preview
+![Live Dashboard Preview](./assets/dashboard-preview.png)  
+_Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring, powered by a serverless AWS pipeline._
 
 ## Tech Stack
 
-**Cloud & Infrastructure:** AWS Lambda · S3 · EventBridge · Streamlit Cloud  
-**Data Processing:** Python · pandas · VADER · boto3
-**Storage Formats:** JSON (raw data), Parquet (enriched data)
+**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud   
+**Data Processing:** Python · pandas · VADER · boto3  
+**Storage Formats:** JSON (raw data), Parquet (enriched data)  
 **Query Engine**: DuckDB  
-**Dashboarding & Visualization:** Streamlit  
+**Dashboarding & Visualization:** Streamlit
 
 ## Components
 
@@ -41,7 +45,8 @@ News data is critical for monitoring sentiment shifts across industries and comp
 
 ## Architecture Flow (Step-by-Step)
 
-![NewsPulse Architecture](./assets/updated-news-pipeline.png)
+![High-level Architecture](./assets/updated-news-pipeline.png)
+_Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notifications to process news data through ingestion, NLP transformation, validation, and analytics via DuckDB and Streamlit._
 
 1. **News Ingestion**  
    EventBridge triggers a Lambda function twice daily to fetch news from NewsAPI, storing the raw JSON in an S3 `raw` bucket.
@@ -56,6 +61,9 @@ News data is critical for monitoring sentiment shifts across industries and comp
    - DuckDB queries the Parquet files directly from S3 (no database needed)
    - Streamlit dashboard displays sentiment scores, source breakdowns through interactive visualizations
 
+## Project Links
+- **Live App (Streamlit Cloud):** [https://your-streamlit-url.com](https://your-streamlit-url.com)
+- **GitHub Repository:** [https://github.com/nakuleshj/news-nlp-pipeline](https://github.com/nakuleshj/news-nlp-pipeline)
 
 ## Key Learnings
 - Designed a cost-efficient, production-grade serverless pipeline
@@ -63,6 +71,10 @@ News data is critical for monitoring sentiment shifts across industries and comp
 - Applied custom data quality monitoring with `pandas`-based validation 
 - Built a real-time dashboard to visualize sentiment insights with reload triggers
 
+## Try It Yourself
+Want to explore the live pipeline in action?  
+- [Launch the Live Streamlit Dashboard](https://your-streamlit-url.com)  
+- [Browse the Full Source Code on GitHub](https://github.com/nakuleshj/news-nlp-pipeline)
 
 ## Future Improvements
 - Add topic modeling (e.g., LDA) or named entity extraction
@@ -70,3 +82,6 @@ News data is critical for monitoring sentiment shifts across industries and comp
 - Add Slack/email alerting for negative sentiment spikes
 - Implement full CI/CD pipeline (GitHub Actions + Terraform)
 
+## License
+This project is licensed under the [MIT License](LICENSE).  
+Feel free to use, modify, and share with attribution.
