@@ -61,10 +61,6 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
    - DuckDB queries the Parquet files directly from S3 (no database needed)
    - Streamlit dashboard displays sentiment scores, source breakdowns through interactive visualizations
 
-## Project Links
-- **Live App (Streamlit Cloud):** [https://your-streamlit-url.com](https://your-streamlit-url.com)
-- **GitHub Repository:** [https://github.com/nakuleshj/news-nlp-pipeline](https://github.com/nakuleshj/news-nlp-pipeline)
-
 ## Key Learnings
 - Designed a cost-efficient, production-grade serverless pipeline
 - Leveraged event-driven architecture with AWS-native tools
