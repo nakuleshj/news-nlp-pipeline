@@ -20,7 +20,7 @@ News data is critical for monitoring sentiment shifts across industries and comp
 - **Dashboard deployed on Streamlit Cloud** for easy sharing and low-latency access
 
 ## Live Dashboard Preview
-![Live Dashboard Preview](./assets/dashboard-preview.png)  
+![Live Dashboard Preview](./assets/dashboard-preview.gif)  
 _Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring, powered by a serverless AWS pipeline._
 
 ## Tech Stack
