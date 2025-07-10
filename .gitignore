@@ -10,3 +10,5 @@ venv
 *.pem
 
 dependency_layers
+
+terraform-provider-*
