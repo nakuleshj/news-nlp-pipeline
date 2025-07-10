@@ -67,6 +67,16 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
 - Applied custom data quality monitoring with `pandas`-based validation 
 - Built a real-time dashboard to visualize sentiment insights with reload triggers
 
+## Terraform Infrastructure (IaC)
+
+All AWS resources in this project are provisioned using Terraform for automation, reproducibility, and cost-effective deployment. This includes:
+
+- S3 buckets for raw and enriched data
+- EventBridge rule for scheduled ingestion
+- S3 event trigger for enrichment
+- Lambda functions for ingestion and enrichment
+- IAM roles and policies for secure access
+
 ## Try It Yourself
 Want to explore the live pipeline in action?  
 - [Launch the Live Streamlit Dashboard](https://your-streamlit-url.com)  
