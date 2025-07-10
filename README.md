@@ -71,11 +71,12 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
 
 All AWS resources in this project are provisioned using Terraform for automation, reproducibility, and cost-effective deployment. This includes:
 
-- S3 buckets for raw and enriched data
-- EventBridge rule for scheduled ingestion
-- S3 event trigger for enrichment
-- Lambda functions for ingestion and enrichment
-- IAM roles and policies for secure access
+- S3 buckets for raw and enriched news data
+- Lambda functions for ingestion and NLP enrichment
+- EventBridge rules for scheduled ingestion (9AM/5PM)
+- S3 event notification triggers for enrichment Lambda
+- IAM roles and policies with least-privilege permissions
+- **Secrets Management** using AWS Secrets Manager for secure API key storage
 
 ## Try It Yourself
 Want to explore the live pipeline in action?  
