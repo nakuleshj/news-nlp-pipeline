@@ -25,7 +25,7 @@ _Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring,
 
 ## Tech Stack
 
-**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud   
+**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud · Terraform
 **Data Processing:** Python · pandas · VADER · boto3  
 **Storage Formats:** JSON (raw data), Parquet (enriched data)  
 **Query Engine**: DuckDB  
@@ -67,7 +67,7 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
 - Applied custom data quality monitoring with `pandas`-based validation 
 - Built a real-time dashboard to visualize sentiment insights with reload triggers
 
-## Terraform Infrastructure (IaC)
+## Terraform Infrastructure (IaC) (In Process)
 
 All AWS resources in this project are provisioned using Terraform for automation, reproducibility, and cost-effective deployment. This includes:
 
