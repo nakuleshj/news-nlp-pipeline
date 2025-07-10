@@ -66,9 +66,85 @@ resource "aws_s3_bucket_lifecycle_configuration" "enriched_data_bucket_lc" {
   }
 }
 
+# Scripts bucket
+
+resource "aws_s3_bucket" "lambda_scripts" {
+  bucket = "news-pipeline-lambda-scripts"
+
+  tags = {
+    Name        = "Lambda Scripts"
+    Environment = "Dev"
+  }
+}
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+  statement {
+    sid="VisualEditor0"
+    effect = "Allow"
+    actions = [
+        "secretsmanager:GetSecretValue"
+    ]
+    resources = [
+        "arn:aws:secretsmanager:us-east-2:860131551212:secret:news_api-*"
+    ]
+  }
+  statement {
+    effect= "Allow"
+    actions = [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+    ]
+    resources = [
+        "*"
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+                "s3:*",
+                "s3-object-lambda:*"
+            ]
+    resources = [
+        "*"
+        ]
+  }
+}
+
+resource "aws_iam_role" "ingest_lambda_execution_role" {
+    name               = "ingest_lambda-execution-role"
+    assume_role_policy = data.aws_iam_policy_document.assume_role.json
+
+}
+
+resource "aws_lambda_function" "ingest_news" {
+    s3_bucket = aws_s3_bucket.lambda_scripts.bucket
+    s3_key = "ingest_news.zip"
+    function_name    = "ingest_news"
+    role             = aws_iam_role.ingest_lambda_execution_role.arn
+    handler          = "ingest_news.lambda_handler"
+
+    runtime = "python3.13"
+
+    tags = {
+        Environment = "production"
+        Application = "news-pipeline"
+    }
+}
+
 # News Ingestion EventBridge Scheduler
 
-resource "aws_scheduler_schedule" "trigger_news_ingest" {
+/*resource "aws_scheduler_schedule" "trigger_news_ingest" {
     name       = "trigger-news-ingest"
     group_name = "default"
 
@@ -84,4 +160,4 @@ resource "aws_scheduler_schedule" "trigger_news_ingest" {
         arn = 
         role_arn = 
     }
-}
+}*/
