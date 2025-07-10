@@ -25,7 +25,7 @@ _Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring,
 
 ## Tech Stack
 
-**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud · Terraform
+**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud · Terraform  
 **Data Processing:** Python · pandas · VADER · boto3  
 **Storage Formats:** JSON (raw data), Parquet (enriched data)  
 **Query Engine**: DuckDB  
