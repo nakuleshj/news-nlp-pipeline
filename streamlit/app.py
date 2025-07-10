@@ -40,32 +40,13 @@ def load_data():
     return duckdb.sql(query).df()
 
 
-def sentiment_guage_chart(avg_sentiment):
-    fig = go.Figure(
-        go.Indicator(
-            mode="gauge",
-            value=avg_sentiment,
-            gauge={
-                "axis": {
-                    "range": [-1, 1],
-                },
-                "steps": [
-                    {"range": [-1, -0.3], "color": "red", "name": "Negative"},
-                    {"range": [-0.3, 0.3], "color": "yellow"},
-                    {"range": [0.3, 1], "color": "green"},
-                ],
-                "threshold": {
-                    "line": {"color": "black", "width": 2},
-                    "value": avg_sentiment,
-                    "thickness": 1,
-                },
-                "bar": {"thickness": 0},
-            },
-            domain={"x": [0, 1], "y": [0, 1]},
-            title={"text": "Sentiment Score"},
-        )
-    )
-    return fig
+def sentiment_emoji(score):
+    if score > 0.3:
+        return "🟢 😊 Positive"
+    elif score < -0.3:
+        return "🔴 😠 Negative"
+    else:
+        return "🟡 😐 Neutral"
 
 
 def plot_sentiment_heatmap(data):
@@ -93,7 +74,7 @@ df = load_data()
 st.set_page_config(page_title="NewsPulse Dashboard", layout="wide")
 st.title("Aggregated News Dashboard")
 
-st.header("Summary")
+st.subheader("Summary")
 
 
 col1, col2, col3 = st.columns(3)
@@ -109,10 +90,10 @@ with col2:
     )
     st.metric("Unique Sources", n_sources, border=True)
 with col3:
-    sentiment = duckdb.query(
-        "SELECT sentiment, COUNT(*) as counts FROM df GROUP BY sentiment ORDER BY counts DESC LIMIT 1;"
-    ).to_df()["sentiment"][0]
-    st.metric("Overall Sentiment", sentiment[0].upper() + sentiment[1:], border=True)
+    avg_score = duckdb.query("SELECT avg(sentiment_score) as avg FROM df;").to_df()[
+        "avg"
+    ][0]
+    st.metric("Overall Sentiment", sentiment_emoji(avg_score), border=True)
 
 cols = st.columns(2, vertical_alignment="center")
 with cols[0]:
@@ -141,7 +122,7 @@ tab_names = ["Positive", "Neutral", "Negative"]
 recent_news_tabs = st.tabs(tab_names)
 recent_news_dfs = [pd.DataFrame(), pd.DataFrame(), pd.DataFrame()]
 
-for i in range(3):
+for i in range(len(recent_news_dfs)):
     with recent_news_tabs[i]:
         recent_news_dfs[i] = duckdb.query(
             f"SELECT title, url, source, description, published_at, round(sentiment_score,2) as score FROM df WHERE sentiment LIKE '{tab_names[i].lower()}' ORDER BY published_at DESC LIMIT 5;"
