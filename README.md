@@ -76,7 +76,7 @@ All AWS resources in this project are provisioned using Terraform for automation
 - EventBridge rules for scheduled ingestion (9AM/5PM)
 - S3 event notification triggers for enrichment Lambda
 - IAM roles and policies with least-privilege permissions
-- **Secrets Management** using AWS Secrets Manager for secure API key storage
+- Secrets Management using AWS Secrets Manager for secure API key storage
 
 ## Try It Yourself
 Want to explore the live pipeline in action?  
