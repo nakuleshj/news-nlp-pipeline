@@ -1,5 +1,5 @@
 # Event-Driven Serverless Pipeline for Real-Time News NLP and Sentiment Scoring
-[![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://your-streamlit-url.com)
+[![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://news-pipeline.streamlit.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/nakuleshj/news-nlp-pipeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time news data using AWS services. Designed for cost-efficient, scalable deployment using only free-tier AWS services.
