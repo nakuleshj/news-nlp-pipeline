@@ -3,7 +3,6 @@ import duckdb
 from dotenv import load_dotenv
 import os
 import plotly.graph_objects as go
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from wordcloud import WordCloud

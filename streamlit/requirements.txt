@@ -4,3 +4,8 @@ boto3
 duckdb
 pyarrow
 s3fs
+dotenv
+plotly
+matplotlib
+seaborn
+wordcloud
