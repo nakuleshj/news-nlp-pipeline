@@ -157,7 +157,35 @@ resource "aws_lambda_function" "ingest_news" {
     schedule_expression_timezone =  "America/New_York"
     
     target {
-        arn = 
+        arn = aws_lambda_function.ingest_news.arn
         role_arn = 
     }
 }*/
+
+resource "aws_lambda_layer_version" "pandas" {
+  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
+  s3_key    = aws_s3_object.lambda_layer_zip.key
+
+  layer_name = "lambda_layer_name"
+
+  compatible_runtimes      = ["nodejs20.x", "python3.12"]
+  compatible_architectures = ["x86_64", "arm64"]
+}
+resource "aws_lambda_layer_version" "requests" {
+  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
+  s3_key    = aws_s3_object.lambda_layer_zip.key
+
+  layer_name = "lambda_layer_name"
+
+  compatible_runtimes      = ["nodejs20.x", "python3.12"]
+  compatible_architectures = ["x86_64", "arm64"]
+}
+resource "aws_lambda_layer_version" "nltk" {
+  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
+  s3_key    = aws_s3_object.lambda_layer_zip.key
+
+  layer_name = "lambda_layer_name"
+
+  compatible_runtimes      = ["nodejs20.x", "python3.12"]
+  compatible_architectures = ["x86_64", "arm64"]
+}
