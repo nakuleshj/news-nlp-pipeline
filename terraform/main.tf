@@ -89,57 +89,102 @@ data "aws_iam_policy_document" "assume_role" {
     actions = ["sts:AssumeRole"]
   }
   statement {
-    sid="VisualEditor0"
+    sid    = "VisualEditor0"
     effect = "Allow"
     actions = [
-        "secretsmanager:GetSecretValue"
+      "secretsmanager:GetSecretValue"
     ]
     resources = [
-        "arn:aws:secretsmanager:us-east-2:860131551212:secret:news_api-*"
-    ]
-  }
-  statement {
-    effect= "Allow"
-    actions = [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-    ]
-    resources = [
-        "*"
+      "arn:aws:secretsmanager:us-east-2:860131551212:secret:news_api-*"
     ]
   }
   statement {
     effect = "Allow"
     actions = [
-                "s3:*",
-                "s3-object-lambda:*"
-            ]
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
     resources = [
-        "*"
-        ]
+      "*"
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:*",
+      "s3-object-lambda:*"
+    ]
+    resources = [
+      "*"
+    ]
   }
 }
 
-resource "aws_iam_role" "ingest_lambda_execution_role" {
-    name               = "ingest_lambda-execution-role"
-    assume_role_policy = data.aws_iam_policy_document.assume_role.json
-
+resource "aws_iam_role" "lambda_execution_role" {
+  name               = "lambda-execution-role"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_lambda_function" "ingest_news" {
-    s3_bucket = aws_s3_bucket.lambda_scripts.bucket
-    s3_key = "ingest_news.zip"
-    function_name    = "ingest_news"
-    role             = aws_iam_role.ingest_lambda_execution_role.arn
-    handler          = "ingest_news.lambda_handler"
+  filename      = "./scripts/ingest_news.zip"
+  function_name = "ingest_news"
+  role          = aws_iam_role.lambda_execution_role.arn
+  handler       = "ingest_news.lambda_handler"
 
-    runtime = "python3.13"
+  runtime = "python3.13"
 
-    tags = {
-        Environment = "production"
-        Application = "news-pipeline"
-    }
+  layers = [aws_lambda_layer_version.requests_layer.arn]
+
+  tags = {
+    Environment = "production"
+    Application = "news-pipeline"
+  }
+}
+
+resource "aws_lambda_function" "enrich_news" {
+
+  filename      = "./scripts/enrich_raw_data.zip"
+  function_name = "enrich_raw_data"
+  role          = aws_iam_role.lambda_execution_role.arn
+  handler       = "enrich_raw_data.lambda_handler"
+
+  runtime = "python3.13"
+
+  layers = [
+    "arn:aws:lambda:us-east-2:336392948345:layer:AWSSDKPandas-Python313:3",
+    aws_lambda_layer_version.nltk_layer.arn,
+    aws_lambda_layer_version.pyarrow_layer.arn
+  ]
+
+  tags = {
+    Environment = "production"
+    Application = "news-pipeline"
+  }
+}
+
+resource "aws_lambda_layer_version" "requests_layer" {
+
+  layer_name = "requests_layer"
+  filename   = "./layers/requests_layer_payload.zip"
+
+  compatible_runtimes = ["python3.13"]
+}
+
+resource "aws_lambda_layer_version" "nltk_layer" {
+
+  layer_name = "nltk_layer"
+  filename   = "./layers/nltk_layer_payload.zip"
+
+  compatible_runtimes = ["python3.13"]
+}
+
+resource "aws_lambda_layer_version" "pyarrow_layer" {
+
+  layer_name = "pyarrow_layer"
+  filename   = "./layers/pyarrow_layer_payload.zip"
+
+  compatible_runtimes = ["python3.13"]
 }
 
 # News Ingestion EventBridge Scheduler
@@ -161,31 +206,3 @@ resource "aws_lambda_function" "ingest_news" {
         role_arn = 
     }
 }*/
-
-resource "aws_lambda_layer_version" "pandas" {
-  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
-  s3_key    = aws_s3_object.lambda_layer_zip.key
-
-  layer_name = "lambda_layer_name"
-
-  compatible_runtimes      = ["nodejs20.x", "python3.12"]
-  compatible_architectures = ["x86_64", "arm64"]
-}
-resource "aws_lambda_layer_version" "requests" {
-  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
-  s3_key    = aws_s3_object.lambda_layer_zip.key
-
-  layer_name = "lambda_layer_name"
-
-  compatible_runtimes      = ["nodejs20.x", "python3.12"]
-  compatible_architectures = ["x86_64", "arm64"]
-}
-resource "aws_lambda_layer_version" "nltk" {
-  s3_bucket = aws_s3_object.lambda_layer_zip.bucket
-  s3_key    = aws_s3_object.lambda_layer_zip.key
-
-  layer_name = "lambda_layer_name"
-
-  compatible_runtimes      = ["nodejs20.x", "python3.12"]
-  compatible_architectures = ["x86_64", "arm64"]
-}

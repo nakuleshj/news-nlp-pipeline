@@ -35,7 +35,7 @@ def lambda_handler(event, context):
             Body=json.dumps(articles),
             ContentType="application/json"
         )
-        print("All Good")
+        
         return {"statusCode": 200, "message": f"{len(articles)} articles saved."}
     except Exception as e:
         print(f"Error: {str(e)}")

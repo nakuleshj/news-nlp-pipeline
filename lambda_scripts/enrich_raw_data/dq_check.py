@@ -19,7 +19,6 @@ def validate_dataframe(df):
     # Sentiment score range checks
     assert df["sentiment_score"].between(-1, 1).all(), "sentiment_score out of expected range"
 
-    # Check for duplicate titles
     assert df["title"].is_unique, "Duplicate titles found"
 
     return True
