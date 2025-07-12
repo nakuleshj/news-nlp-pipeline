@@ -1,10 +1,5 @@
 .env
-bin
-certifi*
-charset*
-idna*
-requests*
-urllib3*
+
 venv
 
 *.pem

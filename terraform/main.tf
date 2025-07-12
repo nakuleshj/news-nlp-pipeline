@@ -66,17 +66,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "enriched_data_bucket_lc" {
   }
 }
 
-# Scripts bucket
-
-resource "aws_s3_bucket" "lambda_scripts" {
-  bucket = "news-pipeline-lambda-scripts"
-
-  tags = {
-    Name        = "Lambda Scripts"
-    Environment = "Dev"
-  }
-}
-
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -189,7 +178,7 @@ resource "aws_lambda_layer_version" "pyarrow_layer" {
 
 # News Ingestion EventBridge Scheduler
 
-/*resource "aws_scheduler_schedule" "trigger_news_ingest" {
+resource "aws_scheduler_schedule" "trigger_news_ingest" {
     name       = "trigger-news-ingest"
     group_name = "default"
 
@@ -203,6 +192,6 @@ resource "aws_lambda_layer_version" "pyarrow_layer" {
     
     target {
         arn = aws_lambda_function.ingest_news.arn
-        role_arn = 
+        role_arn = aws_iam_role.lambda_execution_role.arn
     }
-}*/
+}
