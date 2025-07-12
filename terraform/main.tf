@@ -38,6 +38,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "raw_data_bucket_lc" {
   }
 }
 
+resource "aws_s3_bucket_notification" "raw_news_writes" {
+  bucket = aws_s3_bucket.raw_data_bucket.id
+
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.enrich_news
+    events = ["s3:ObjectCreated:*"]
+  }
+}
+
 # Enriched S3 bucket
 
 resource "aws_s3_bucket" "enriched_news" {
