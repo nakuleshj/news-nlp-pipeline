@@ -8,4 +8,5 @@ dependency_layers
 
 terraform-provider-*
 
-lambda_scripts
+
+*.tfstate*
