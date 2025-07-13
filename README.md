@@ -2,15 +2,16 @@
 [![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://news-pipeline.streamlit.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/nakuleshj/news-nlp-pipeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
-A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time news data using AWS services. Designed for cost-efficient, scalable deployment using only free-tier AWS services.
+A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time news data using AWS services. Designed for cost-efficient, scalable deployment using Terraform and only free-tier AWS services.
 
 
 
 ## Problem Statement
-News data is critical for monitoring sentiment shifts across industries and companies. However, traditional pipelines are batch-heavy, costly, or not scalable. This project solves that by providing a **real-time, serverless architecture** to process news with **NLP sentiment scoring** and expose it via a low-latency, self-service dashboard.
+News data is critical for monitoring sentiment shifts across industries and companies. However, traditional pipelines are batch-heavy, costly, or not scalable. This project solves that by providing a **real-time, serverless architecture** to process news with **NLP sentiment scoring**, deployed and managed via **Terraform** and expose it via a low-latency, self-service dashboard.
 
 ## Features
 
+- **Infrastructure-as-Code**: All AWS infrastructure managed using Terraform
 - **Scheduled ingestion** at 9AM and 5PM each day using EventBridge
 - **NLP scoring** using VADER for sentiment scoring & classification
 - **Data quality validation** with Python & pandas library
@@ -25,7 +26,8 @@ _Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring,
 
 ## Tech Stack
 
-**Cloud & Infrastructure:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud · Terraform  
+**Cloud:** AWS Lambda · AWS S3 · AWS EventBridge · Streamlit Cloud  
+**Infrastructure Management**: Terraform (IaC)
 **Data Processing:** Python · pandas · VADER · boto3  
 **Storage Formats:** JSON (raw data), Parquet (enriched data)  
 **Query Engine**: DuckDB  
@@ -46,7 +48,7 @@ _Deployed Streamlit Cloud dashboard showcasing real-time news sentiment scoring,
 ## Architecture Flow (Step-by-Step)
 
 ![High-level Architecture](./assets/updated-news-pipeline.png)
-_Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notifications to process news data through ingestion, NLP transformation, validation, and analytics via DuckDB and Streamlit._
+_Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notifications to process news data through ingestion, NLP transformation, validation, and analytics via DuckDB and Streamlit. All infrastructure components are deployed via Terraform._
 
 1. **News Ingestion**  
    EventBridge triggers a Lambda function twice daily to fetch news from NewsAPI, storing the raw JSON in an S3 `raw` bucket.
@@ -60,12 +62,16 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
 3. **Querying & Visualization**  
    - DuckDB queries the Parquet files directly from S3 (no database needed)
    - Streamlit dashboard displays sentiment scores, source breakdowns through interactive visualizations
+4. **Terraform Infrastructure Deployment**
+   - S3 buckets, IAM roles, Lambda functions, EventBridge rules, and S3 notifications are provisioned using Terraform for consistency and cost-efficiency.
 
 ## Key Learnings
-- Designed a cost-efficient, production-grade serverless pipeline
-- Leveraged event-driven architecture with AWS-native tools
+- Designed a cost-efficient, production-grade serverless pipeline using Terraform as IaC
+- Applied event-driven architecture with AWS-native tools such as Lambda, S3, and EventBridge
+- Implemented automated provisioning of all cloud resources via Terraform
 - Applied custom data quality monitoring with `pandas`-based validation 
 - Built a real-time dashboard to visualize sentiment insights with reload triggers
+- Managed secrets securely using AWS Secrets Manager
 
 ## Terraform Infrastructure (IaC) (In Process)
 
@@ -84,10 +90,8 @@ Want to explore the live pipeline in action?
 - [Browse the Full Source Code on GitHub](https://github.com/nakuleshj/news-nlp-pipeline)
 
 ## Future Improvements
-- Add topic modeling (e.g., LDA) or named entity extraction
 - Integrate with Amazon Athena or Redshift Spectrum for large-scale analytics
 - Add Slack/email alerting for negative sentiment spikes
-- Implement full CI/CD pipeline (GitHub Actions + Terraform)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).  
