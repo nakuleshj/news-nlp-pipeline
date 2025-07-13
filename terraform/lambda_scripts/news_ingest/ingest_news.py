@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     url = f"https://newsapi.org/v2/everything"
     params={
         "apiKey":api_key,
-        "sources":"bloomberg,associated-press,buzzfeed,cbs-news,fortune",
+        "q":"economy OR inflation OR recession OR tariffs",
         "language":"en",
         "sortBy":"publishedAt",
         "pageSize":100

@@ -11,4 +11,6 @@ terraform-provider-*
 
 *.tfstate*
 
-.terraform*
+.terraform
+
+.terraform.lock.hcl
