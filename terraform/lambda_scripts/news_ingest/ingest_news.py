@@ -12,7 +12,11 @@ def lambda_handler(event, context):
     url = f"https://newsapi.org/v2/everything"
     params={
         "apiKey":api_key,
-        "q":"economy OR inflation OR recession OR tariffs",
+        "q": ('"US recession" OR "economic uncertainty USA" OR "market volatility USA" OR '
+        '"Federal Reserve risk" OR "credit risk USA" OR "default risk USA" OR '
+        '"corporate layoffs USA" OR "business closures USA" OR '
+        '"supply chain disruption USA" OR "interest rate risk USA" OR '
+        '"inflation risk USA" OR "debt ceiling USA" OR "financial instability USA"'),
         "language":"en",
         "sortBy":"publishedAt",
         "pageSize":100
