@@ -10,7 +10,7 @@ import pandas as pd
 
 load_dotenv()
 
-BUCKET = "news-nl-enriched"
+BUCKET = "enriched-nlp-news-data"
 REGION = "us-east-2"
 KEY = "*.parquet"
 S3_URI = f"s3://{BUCKET}/{KEY}"
