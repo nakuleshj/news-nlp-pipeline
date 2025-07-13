@@ -152,6 +152,8 @@ resource "aws_lambda_function" "ingest_news" {
 
   timeout = 30
 
+  source_code_hash = filebase64sha256("./lambda_scripts/news_ingest/ingest_news.zip")
+
   memory_size = 256
 
   layers = [aws_lambda_layer_version.requests_layer.arn]
@@ -170,6 +172,8 @@ resource "aws_lambda_function" "enrich_news" {
   handler       = "enrich_raw_data.lambda_handler"
 
   runtime = "python3.13"
+
+  source_code_hash = filebase64sha256("./lambda_scripts/enrich_raw_data/enrich_raw_data.zip")
 
   timeout = 30
 
