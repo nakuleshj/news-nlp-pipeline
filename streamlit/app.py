@@ -71,8 +71,8 @@ def plot_wordcloud(df):
 
 df = load_data()
 
-st.set_page_config(page_title="NewsPulse Dashboard", layout="wide")
-st.title("Aggregated News Dashboard")
+st.set_page_config(page_title="Economic News Dashboard", layout="wide")
+st.title("Economic News Dashboard")
 
 st.subheader("Summary")
 
@@ -106,7 +106,9 @@ with cols[0]:
                           COUNT(CASE WHEN sentiment_score = 0 THEN 1 ELSE NULL END) AS Neutral,
                           COUNT(CASE WHEN sentiment_score < 0 THEN 1 ELSE NULL END) AS Negative
                           FROM df
-                          GROUP BY source;
+                          GROUP BY source
+                          ORDER BY COUNT(*) DESC
+                          LIMIT 10;
                           """
         )
         .to_df()
