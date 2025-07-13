@@ -73,7 +73,7 @@ _Serverless data pipeline using AWS Lambda, EventBridge, and S3 event notificati
 - Built a real-time dashboard to visualize sentiment insights with reload triggers
 - Managed secrets securely using AWS Secrets Manager
 
-## Terraform Infrastructure (IaC) (In Process)
+## Terraform Infrastructure (IaC)
 
 All AWS resources in this project are provisioned using Terraform for automation, reproducibility, and cost-effective deployment. This includes:
 
