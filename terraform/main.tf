@@ -143,7 +143,7 @@ resource "aws_iam_role_policy" "inline_policy" {
 }
 
 resource "aws_lambda_function" "ingest_news" {
-  filename      = "./scripts/ingest_news.zip"
+  filename      = "./lambda_scripts/news_ingest/ingest_news.zip"
   function_name = "ingest_news"
   role          = aws_iam_role.ud_lambda_execution_role.arn
   handler       = "ingest_news.lambda_handler"
@@ -164,7 +164,7 @@ resource "aws_lambda_function" "ingest_news" {
 
 resource "aws_lambda_function" "enrich_news" {
 
-  filename      = "./scripts/enrich_raw_data.zip"
+  filename      = "./lambda_scripts/enrich_raw_data/enrich_raw_data.zip"
   function_name = "enrich_raw_data"
   role          = aws_iam_role.ud_lambda_execution_role.arn
   handler       = "enrich_raw_data.lambda_handler"
