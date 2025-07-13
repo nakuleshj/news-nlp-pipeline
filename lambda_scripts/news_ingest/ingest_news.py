@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         key = f"news_{now}.json"
         print(articles)
         s3.put_object(
-            Bucket="raw-data-njk",
+            Bucket="raw-news-api-data",
             Key=key,
             Body=json.dumps(articles),
             ContentType="application/json"

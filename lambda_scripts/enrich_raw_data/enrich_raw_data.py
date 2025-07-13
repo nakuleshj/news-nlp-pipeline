@@ -9,9 +9,6 @@ logging.basicConfig(level=logging.INFO)
 
 sys.path.append("/opt")
 os.environ["NLTK_DATA"] = "/opt/python/nltk_data"
-print("Files in /opt:", os.listdir("/opt"))
-print("Files in /opt/python/nltk_data:", os.listdir("/opt/python/nltk_data"))
-print("NLTK_DATA path:", os.environ.get("NLTK_DATA"))
 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
@@ -63,7 +60,7 @@ def lambda_handler(event, context):
 
     output_key = f"{key.split('/')[-1].replace('.json', '.parquet')}"
     s3.put_object(
-        Bucket="news-nl-enriched",
+        Bucket="enriched-nlp-news-data",
         Key=output_key,
         Body=buffer.getvalue(),
         ContentType="application/octet-stream"
