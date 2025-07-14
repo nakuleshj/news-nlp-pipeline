@@ -1,13 +1,13 @@
-# Event-Driven Serverless Pipeline for Real-Time News NLP and Sentiment Scoring
+# Event-Driven Serverless Pipeline for Real-Time Financial News NLP and Sentiment Scoring
 [![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://news-pipeline.streamlit.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/nakuleshj/news-nlp-pipeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
-A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time news data using AWS services. Designed for cost-efficient, scalable deployment using Terraform and only free-tier AWS services.
+A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time financial news data using AWS services. Designed for cost-efficient, scalable deployment using Terraform and only free-tier AWS services.
 
 
 
 ## Problem Statement
-News data is critical for monitoring sentiment shifts across industries and companies. However, traditional pipelines are batch-heavy, costly, or not scalable. This project solves that by providing a **real-time, serverless architecture** to process news with **NLP sentiment scoring**, deployed and managed via **Terraform** and expose it via a low-latency, self-service dashboard.
+In financial markets, timely insights from news can significantly influence investment decisions, risk assessments, and trading strategies. However, traditional news processing pipelines are batch-oriented, resource-intensive, and lack scalability. This project addresses these challenges by offering a real-time, serverless architecture to ingest and analyze financial news with NLP-based sentiment scoring. The entire pipeline is infrastructure-as-code using Terraform and exposes enriched insights via a low-latency, self-service dashboard — enabling traders, analysts, and portfolio managers to monitor sentiment across companies, sectors, and macroeconomic themes as it unfolds.
 
 ## Features
 
