@@ -71,8 +71,8 @@ def plot_wordcloud(df):
 
 df = load_data()
 
-st.set_page_config(page_title="Economic News Dashboard", layout="wide")
-st.title("Economic News Dashboard")
+st.set_page_config(page_title="Financial News Dashboard", layout="wide")
+st.title("Financial News Dashboard")
 
 st.subheader("Summary")
 
