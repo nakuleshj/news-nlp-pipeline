@@ -8,15 +8,15 @@ def get_news_api_key():
     return json.loads(secret['SecretString'])["news_api_key"]
 
 def lambda_handler(event, context):
+    finance_sources = [
+        "bloomberg", "business-insider", "cnbc", "financial-post", "fortune",
+        "the-wall-street-journal", "reuters", "the-economist"
+    ]
     api_key = get_news_api_key()
     url = f"https://newsapi.org/v2/everything"
     params={
         "apiKey":api_key,
-        "q": ('"US recession" OR "economic uncertainty" OR "market volatility" OR '
-        '"Federal Reserve risk" OR "credit risk" OR "default risk" OR '
-        '"corporate layoffs" OR "business closures" OR '
-        '"supply chain disruption" OR "interest rate risk" OR '
-        '"inflation risk " OR "debt ceiling" OR "financial instability"'),
+        "sources": ",".join(finance_sources),
         "language":"en",
         "sortBy":"publishedAt",
         "pageSize":100
