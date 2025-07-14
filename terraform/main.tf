@@ -250,5 +250,6 @@ resource "aws_scheduler_schedule" "trigger_news_ingest" {
     target {
         arn = aws_lambda_function.ingest_news.arn
         role_arn = aws_iam_role.scheduler_role.arn
+        input= jsonencode({})
     }
 }
