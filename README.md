@@ -1,7 +1,14 @@
 # Event-Driven Serverless Pipeline for Real-Time Financial News NLP and Sentiment Scoring
-[![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-red?logo=streamlit&logoColor=white)](https://news-pipeline.streamlit.app)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/nakuleshj/news-nlp-pipeline)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live App](https://img.shields.io/badge/Streamlit_Cloud-Live_App-red?logo=streamlit&logoColor=white)](https://news-pipeline.streamlit.app)
+![AWS Lambda](https://img.shields.io/badge/AWS%20Lambda-FF9900?logo=awslambda&logoColor=white)
+![AWS S3](https://img.shields.io/badge/AWS%20S3-569A31?logo=amazons3&logoColor=white)
+![AWS EventBridge](https://img.shields.io/badge/AWS%20EventBridge-8C4FFF?logo=amazonaws&logoColor=white)
+![Streamlit Cloud](https://img.shields.io/badge/Streamlit%20Cloud-FF4B4B?logo=streamlit&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
+![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?logo=duckdb&logoColor=black)
+
 A fully serverless, event-driven data pipeline that ingests, enriches, validates, and visualizes real-time financial news data using AWS services. Designed for cost-efficient, scalable deployment using Terraform and only free-tier AWS services.
 
 
